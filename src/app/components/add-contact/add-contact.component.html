@@ -1,0 +1,77 @@
+<div>
+    <div class="contact-form">
+      <h2 class="mb-4" [ngStyle]="{'text-align': 'center'}"> Add a new Contact </h2>
+      <div *ngIf="!submitted">
+
+        <!-- for errors  -->
+        <div class="form-group mb-3">
+        
+            <div *ngIf="errors.length > 0" class="alert alert-danger">
+                <ul>
+                  <li *ngFor="let error of errors">{{ error }}</li>
+                </ul>
+              </div>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="firstname">Firstname</label>
+          <input
+            type="text"
+            class="form-control"
+            id="firstname"
+            required
+            [(ngModel)]="contact.firstname"
+            name="firstname"
+            placeholder="Enter firstname"
+          />
+        </div>
+  
+        <div class="form-group mb-3">
+          <label for="lastname">Lastname</label>
+          <input
+            class="form-control"
+            id="lastname"
+            required
+            [(ngModel)]="contact.lastname"
+            name="lastname"
+            placeholder="Enter lastname"
+          />
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              required
+              [(ngModel)]="contact.email"
+              name="email"
+              placeholder="Enter email"
+            />
+        </div>
+
+
+        <div class="form-group mb-3">
+            <label for="company">Company</label>
+            <select class="form-select" name="company" [(ngModel)]="contact.company">
+                <option value="">Select Company</option>
+                <option value="'some company'">Some Company</option>
+            </select>
+          </div>
+
+
+
+
+        <div class="buttonsbox">
+            <button (click)="saveContact()" class="btn btn-primary">Add Contact</button>
+            <button (click)="newContact()" class="btn btn-danger">Clear Entries</button>
+        </div>
+      </div>
+  
+      <div *ngIf="submitted">
+        <h4>Tutorial was submitted successfully!</h4>
+        <a routerLink="add" class="btn btn-success" >Add</a>
+      </div>
+    </div>
+  </div>
