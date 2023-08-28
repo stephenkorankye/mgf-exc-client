@@ -11,6 +11,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from "@angular/common/http";
 import { SortIconComponent } from './components/sort-icon/sort-icon.component';
 import { FilterTableComponent } from './components/filter-table/filter-table.component';
+import { SingleContactComponent } from './components/single-contact/single-contact.component';
+import { ViewReportComponent } from './components/view-report/view-report.component';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { FilterTableComponent } from './components/filter-table/filter-table.com
     ContactDetailsComponent,
     ViewContactsComponent,
     SortIconComponent,
-    FilterTableComponent
+    FilterTableComponent,
+    SingleContactComponent,
+    ViewReportComponent
   ],
   imports: [
     BrowserModule,

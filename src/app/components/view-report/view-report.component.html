@@ -1,0 +1,49 @@
+<div class="mt-4">
+    <h2 [ngStyle]="{'text-align': 'center'}">View Companies </h2>
+
+    <div>
+        <button class="btn btn-success" (click)="toExcel()">
+            Download Report
+        </button>
+    </div>
+  
+    <!-- displaying contacts -->
+    <table class="table table-striped mt-3">
+      <thead>
+        <tr>
+  
+          <!-- column titles with click to sort abilities  -->
+          <th scope="col" > 
+            ID
+          </th>
+          
+          <th scope="col" > 
+            Company Name 
+          </th>
+
+          <th scope="col" > 
+            Company Postcode
+          </th>
+
+          <th scope="col" > 
+            No. of People in Area 
+          </th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <!-- column data  -->
+        <tr *ngFor="let company of companies">
+          <th>{{ company.id }}</th>
+          <td>{{ company.name }} </td>
+          <td>{{ company.postcode }}</td>
+          <td>{{ company.count }}</td>
+          <!-- <td><a routerLink="./{{contact.id}}">View More</a></td> -->
+        </tr>
+      </tbody>
+    </table>
+  
+   
+    
+  </div>
+  

@@ -5,39 +5,25 @@ import { Contact, ContactForm } from '../models/contact.model';
 import { BASE_URL } from '../util/URL';
 
 
-const ENDPOINT = BASE_URL + 'contacts';
-
+const ENDPOINT = BASE_URL + 'companies';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ContactsService {
+export class CompaniesService {
 
   constructor(private http: HttpClient) { }
 
-  // fetch contacts
+  // fetch companies
   getAll(): Observable<any> {
     return this.http.get<Contact[]>(`${ENDPOINT}`);
   }
 
-  // fetch a single contact 
+  // fetch a single contacts in specific company 
   get(id: any): Observable<any> {
     return this.http.get<Contact>(`${ENDPOINT}/${id}`);
   }
 
-  // post new contact to server 
-  create(data: any): Observable<ContactForm> {
-    return this.http.post(ENDPOINT, data);
-  }
-
-  // edit a contact 
-  update(id: any, data: any): Observable<any> {
-    return this.http.put(`${ENDPOINT}/${id}`, data);
-  }
-
-  // soft delete contact 
-  delete(id: any): Observable<any> {
-    return this.http.delete(`${ENDPOINT}/${id}`);
-  }  
+ 
 
 }

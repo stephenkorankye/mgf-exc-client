@@ -105,6 +105,16 @@ export class ViewContactsComponent implements OnInit {
   applyFilter(query: string): void {
     this.searchQuery = query ; 
     if (!this.allContacts || !query) {
+      this.filteredContacts = this.allContacts ; 
+      
+      this.contacts = this.filteredContacts?.slice(
+        (this.currentPage - 1) * 10,
+        this.currentPage * 10
+      );
+
+      this.totalPages = Math.ceil(
+        (this.filteredContacts?.length || 0) / this.perPage
+      );
       return;
     }
 
@@ -114,6 +124,7 @@ export class ViewContactsComponent implements OnInit {
       this.contacts = this.allContacts?.slice(
         (this.currentPage - 1) * this.perPage,
         this.currentPage * this.perPage
+        
       );
       return;
     }
