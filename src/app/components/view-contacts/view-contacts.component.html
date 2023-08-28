@@ -1,6 +1,10 @@
 <div class="mt-4">
   <h2 [ngStyle]="{'text-align': 'center'}">View Contacts </h2>
 
+  
+  <app-filter-table (columnChanged)="changeColumn($event)" (filterChanged)="applyFilter($event)"></app-filter-table>
+
+
   <!-- displaying contacts -->
   <table class="table table-striped">
     <thead>
@@ -11,13 +15,13 @@
           ID 
           <app-sort-icon [active]="sortBy === 'id'" [direction]="sortDirection"></app-sort-icon>
         </th>
-        <th scope="col" (click)="sortTable('firstname')">
-          Firstname 
-          <app-sort-icon [active]="sortBy === 'firstname'" [direction]="sortDirection"></app-sort-icon>
+        <th scope="col" (click)="sortTable('fullname')">
+          Fullname 
+          <app-sort-icon [active]="sortBy === 'fullname'" [direction]="sortDirection"></app-sort-icon>
         </th>
-        <th scope="col" (click)="sortTable('lastname')">
-          Lastname
-          <app-sort-icon [active]="sortBy === 'lastname'" [direction]="sortDirection"></app-sort-icon>
+        <th scope="col" (click)="sortTable('email')">
+          Email
+          <app-sort-icon [active]="sortBy === 'email'" [direction]="sortDirection"></app-sort-icon>
         </th>
         <th scope="col" (click)="sortTable('company')">
           Company
@@ -35,7 +39,7 @@
       <tr *ngFor="let contact of contacts">
         <th>{{ contact.id }}</th>
         <td>{{ contact.firstname }} {{ contact.lastname }}</td>
-        <td>{{ contact.lastname }}</td>
+        <td>{{ contact.email }}</td>
         <td>{{ contact.company?.name }}</td>
         <td><a routerLink="">View More</a></td>
       </tr>

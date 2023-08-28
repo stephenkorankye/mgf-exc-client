@@ -3,3 +3,9 @@ table {
     margin: auto;
     margin-top : 30px ; 
 }
+
+.table-striped > thead > tr:first-child  {
+    cursor: pointer;
+    
+}
+

@@ -10,6 +10,7 @@ import { ViewContactsComponent } from './components/view-contacts/view-contacts.
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from "@angular/common/http";
 import { SortIconComponent } from './components/sort-icon/sort-icon.component';
+import { FilterTableComponent } from './components/filter-table/filter-table.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { SortIconComponent } from './components/sort-icon/sort-icon.component';
     AddContactComponent,
     ContactDetailsComponent,
     ViewContactsComponent,
-    SortIconComponent
+    SortIconComponent,
+    FilterTableComponent
   ],
   imports: [
     BrowserModule,

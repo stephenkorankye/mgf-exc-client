@@ -1,0 +1,14 @@
+<div class="row mt-3">
+    <div class="col-md-2 m-0 p-0">
+      <select name="columnname" class="form-select" [(ngModel)]="selectedColumnName" (ngModelChange)="onColumnChanged()">
+        <option value="">All Columns</option>
+        <option value="firstname">Firstname</option>
+        <option value="lastname">Lastname</option>
+        <option value="email">Email</option>
+        <option value="company">Company</option>
+      </select>
+    </div>
+    <div class="col-md-10 m-0 p-0">
+      <input type="text" [(ngModel)]="searchQuery" (input)="filterContacts()" class="form-control" placeholder="Start typing to search">
+    </div>
+  </div>
