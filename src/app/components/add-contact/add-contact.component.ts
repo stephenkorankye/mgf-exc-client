@@ -1,5 +1,5 @@
 import { Component , OnInit } from '@angular/core';
-import { Contact } from 'src/app/models/contact.model';
+import { ContactForm } from 'src/app/models/contact.model';
 import { ContactsService } from 'src/app/services/contacts.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { ContactsService } from 'src/app/services/contacts.service';
 
 export class AddContactComponent implements OnInit {
 
-  contact : Contact = {
+  contact : ContactForm = {
     id : undefined , 
     firstname : "" , 
     lastname : "" , 

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Contact } from '../models/contact.model';
+import { Contact, ContactForm } from '../models/contact.model';
+
 
 const ENDPOINT = 'http://localhost:5000/api/contacts';
 
@@ -13,22 +14,27 @@ export class ContactsService {
 
   constructor(private http: HttpClient) { }
 
+  // fetch contacts
   getAll(): Observable<any> {
-    return this.http.get<Contact[]>(ENDPOINT);
+    return this.http.get<Contact[]>(`${ENDPOINT}`);
   }
 
+  // fetch a single contact 
   get(id: any): Observable<any> {
     return this.http.get<Contact>(`${ENDPOINT}/${id}`);
   }
 
-  create(data: any): Observable<any> {
+  // post new contact to server 
+  create(data: any): Observable<ContactForm> {
     return this.http.post(ENDPOINT, data);
   }
 
+  // edit a contact 
   update(id: any, data: any): Observable<any> {
     return this.http.put(`${ENDPOINT}/${id}`, data);
   }
 
+  // soft delete contact 
   delete(id: any): Observable<any> {
     return this.http.delete(`${ENDPOINT}/${id}`);
   }  

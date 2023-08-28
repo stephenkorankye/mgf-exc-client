@@ -1,1 +1,63 @@
-<p>view-contacts works!</p>
+<div class="mt-4">
+  <h2 [ngStyle]="{'text-align': 'center'}">View Contacts </h2>
+
+  <!-- displaying contacts -->
+  <table class="table table-striped">
+    <thead>
+      <tr>
+
+        <!-- column titles with click to sort abilities  -->
+        <th scope="col" (click)="sortTable('id')"> 
+          ID 
+          <app-sort-icon [active]="sortBy === 'id'" [direction]="sortDirection"></app-sort-icon>
+        </th>
+        <th scope="col" (click)="sortTable('firstname')">
+          Firstname 
+          <app-sort-icon [active]="sortBy === 'firstname'" [direction]="sortDirection"></app-sort-icon>
+        </th>
+        <th scope="col" (click)="sortTable('lastname')">
+          Lastname
+          <app-sort-icon [active]="sortBy === 'lastname'" [direction]="sortDirection"></app-sort-icon>
+        </th>
+        <th scope="col" (click)="sortTable('company')">
+          Company
+          <app-sort-icon [active]="sortBy === 'company'" [direction]="sortDirection"></app-sort-icon>
+        </th>
+
+        <th scope="col" >
+          Details
+        </th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <!-- column data  -->
+      <tr *ngFor="let contact of contacts">
+        <th>{{ contact.id }}</th>
+        <td>{{ contact.firstname }} {{ contact.lastname }}</td>
+        <td>{{ contact.lastname }}</td>
+        <td>{{ contact.company?.name }}</td>
+        <td><a routerLink="">View More</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- pagination -->
+  <div class="col-md-12 mt-4"> 
+  <nav aria-label="...">
+    <ul class="pagination">
+      <li (click)="goToPage(currentPage - 1)" class="page-item" [class.disabled]="currentPage <= 1">
+        <span class="page-link">Previous</span>
+      </li>
+      <li *ngFor="let page of totalPagesArray()" (click)="goToPage(page)" class="page-item" [class.active]="currentPage == page"><a class="page-link" href="javascript:void(0);">
+        {{page}}
+      </a></li>
+      
+      <li class="page-item">
+        <a class="page-link" href="javascript:void(0);" (click)="goToPage(currentPage + 1)" >Next</a>
+      </li>
+    </ul>
+  </nav>
+  </div>
+  
+</div>
