@@ -1,6 +1,19 @@
-# MgfExcClient
+# MGF Exercise - Client ( Angular )
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.0.
+
+## Features Completed
+- Display Contacts 
+- Implementing sorting and filtering (by all categories and also by each column)
+- View single Contact 
+- Adding a new Contact
+- Editing a Contact 
+- View companies and option to download as Excel
+
+
+## Installation Process 
+- Clone this repository ```https://github.com/stephenkorankye/mgf-exc-client.git```
+- Open cmd and type ```npm install```
 
 ## Development server
 
