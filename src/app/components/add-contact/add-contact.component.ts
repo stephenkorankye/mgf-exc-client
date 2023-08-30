@@ -1,5 +1,6 @@
 import { Component , OnInit } from '@angular/core';
 import { ContactForm } from 'src/app/models/contact.model';
+import { CompaniesService } from 'src/app/services/companies.service';
 import { ContactsService } from 'src/app/services/contacts.service';
 
 @Component({
@@ -17,16 +18,29 @@ export class AddContactComponent implements OnInit {
     email : "" , 
     company : "" 
   }
+  companies? : any[] ; 
 
   submitted = false ; 
   errors : Array<string> = [] ; 
 
-  constructor(private contactsService : ContactsService) {} 
+  constructor(private contactsService : ContactsService , private companiesService : CompaniesService) {} 
 
   ngOnInit(): void {
-    
+    this.getCompanies() ; 
   }
 
+
+  // gettincompanies
+  getCompanies(): void {
+    this.companiesService.getAll()
+      .subscribe({
+        next : (data) => {
+          this.companies = data.data ;
+          console.log ( data.data ) 
+        } , 
+        error : (e) => console.error(e) 
+      })
+  }
 
   saveContact(): void {
     this.errors = [] ; 

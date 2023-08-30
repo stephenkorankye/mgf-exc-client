@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Contact } from 'src/app/models/contact.model';
+import { CompaniesService } from 'src/app/services/companies.service';
 import { ContactsService } from 'src/app/services/contacts.service';
 
 @Component({
@@ -11,17 +12,20 @@ import { ContactsService } from 'src/app/services/contacts.service';
 export class SingleContactComponent implements OnInit {
 
   contact?: any ; 
+  companies?: any[] ; 
   staticContact?: any ; 
   contactId = "" ; 
   submitted = false ; 
   errors : Array<string> = [] ; 
 
-  constructor(private contactsService : ContactsService , private route: ActivatedRoute , private router: Router ) {}
+  constructor(private companiesService: CompaniesService , private contactsService : ContactsService , private route: ActivatedRoute , private router: Router ) {}
   ngOnInit(): void {
     this.route.params.subscribe( params => {
       this.contactId = params['id'] ; 
       this.getContact(params['id']) ;
     })
+
+    this.getCompanies() ; 
      
   }
 
@@ -30,11 +34,26 @@ export class SingleContactComponent implements OnInit {
       .subscribe({
         next : (data) => {
           if ( !data.data ) {
-            this.router.navigate(["/contacts"])
+            this.router.navigate(["/contacts"]); 
           }
           this.contact = data.data ; 
           this.staticContact = JSON.parse(JSON.stringify(data.data)) ;  
           console.log ( data ) ; 
+        } , 
+        error : (e) => {
+          this.router.navigate(["/contacts"]); 
+
+        }
+      })
+  }
+
+  // getting companies
+  getCompanies(): void {
+    this.companiesService.getAll()
+      .subscribe({
+        next : (data) => {
+          this.companies = data.data ;
+          console.log ( data.data ) 
         } , 
         error : (e) => console.error(e) 
       })
@@ -75,6 +94,15 @@ export class SingleContactComponent implements OnInit {
       })
 
 
+  }
+
+  onCompanyChange(event: any) {
+    const selectedCompanyId = event.target.value;
+    this.contact.company.id = selectedCompanyId ; 
+  }
+
+  reloadPage() {
+    window.location.reload() ; 
   }
 
 }

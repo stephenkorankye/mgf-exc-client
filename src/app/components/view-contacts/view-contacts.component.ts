@@ -1,4 +1,5 @@
 import { Component , OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Contact, ContactForm } from 'src/app/models/contact.model';
 import { ContactsService } from 'src/app/services/contacts.service';
 
@@ -20,7 +21,7 @@ export class ViewContactsComponent implements OnInit {
   searchcolumn = ""
   searchQuery = "" 
 
-  constructor(private contactsService : ContactsService ) {} 
+  constructor(private contactsService : ContactsService , private router: Router  ) {} 
   
   ngOnInit(): void {
     this.getContacts() ; 
@@ -33,6 +34,7 @@ export class ViewContactsComponent implements OnInit {
         next : (data) => {
           this.allContacts = data.data ; 
           this.filteredContacts = data.data ; 
+          console.log ( data.data )
 
           // initial data to display 
           this.contacts = data.data.slice(0 , this.perPage); 
@@ -78,6 +80,10 @@ export class ViewContactsComponent implements OnInit {
         aVal = a.company.name.toString() ; 
         bVal = b.company.name.toString() ; 
       } 
+      else if ( column === "companypost" ) {
+        aVal = a.company.postcode.toString() ; 
+        bVal = b.company.postcode.toString() ; 
+      } 
       else if ( column === "fullname" ) {
         aVal = `${a.firstname} ${a.lastname}` ; 
         bVal = `${b.firstname} ${b.lastname}` ; 
@@ -115,6 +121,7 @@ export class ViewContactsComponent implements OnInit {
       this.totalPages = Math.ceil(
         (this.filteredContacts?.length || 0) / this.perPage
       );
+      this.goToPage(1) ; 
       return;
     }
 
@@ -126,23 +133,28 @@ export class ViewContactsComponent implements OnInit {
         this.currentPage * this.perPage
         
       );
+      this.goToPage(1) ; 
       return;
     }
-    console.log ( this.searchcolumn , query )
+
   
     this.filteredContacts = this.allContacts?.filter((contact: any) => {
       let contactValue ; 
 
       if ( this.searchcolumn !== "" ) {
         contactValue = this.searchcolumn === "company" ? contact.company?.name.toLowerCase() : contact[this.searchcolumn].toLowerCase();
+        
       }
      
      
       const companyName = contact.company?.name.toLowerCase();
+      const companyPost = contact.company?.postcode.toLowerCase();
       console.log ( this.searchcolumn )
   
       if (this.searchcolumn === "company") {
         return companyName?.includes(trimmedQuery);
+      }else if (this.searchcolumn === "companypost") {
+        return companyPost?.includes(trimmedQuery);
       } else if (this.searchcolumn !== "") {
         return contactValue?.includes(trimmedQuery);
       } else {
@@ -150,7 +162,8 @@ export class ViewContactsComponent implements OnInit {
           contact.firstname.toLowerCase().includes(trimmedQuery) ||
           contact.lastname.toLowerCase().includes(trimmedQuery) ||
           contact.email.toLowerCase().includes(trimmedQuery) || 
-          contact.company.name.toLowerCase().includes(trimmedQuery)
+          contact.company.name.toLowerCase().includes(trimmedQuery) || 
+          contact.company.postcode.toLowerCase().includes(trimmedQuery)
         );
       }
     });
@@ -163,10 +176,9 @@ export class ViewContactsComponent implements OnInit {
       (this.currentPage - 1) * 10,
       this.currentPage * 10
     );
+    this.goToPage(1) ; 
   }
   
-
-
   
 
   // column to search by 
@@ -175,6 +187,27 @@ export class ViewContactsComponent implements OnInit {
     this.applyFilter(this.searchQuery) ; 
   }
 
+  
+  // view / edit single contact  
+  viewContact(id : any ) {
+    this.router.navigate([`/contacts/${id}`]); 
+
+  }
+
+  // delete contact 
+  deleteContact(id : any ) {
+    let contactIndex = this.contacts?.findIndex(( contact ) => contact.id == id ) ; 
+  
+    if ( contactIndex !== -1 ) {
+      this.allContacts?.splice(contactIndex || 0  , 1 ) ; 
+      this.filteredContacts?.splice(contactIndex || 0 , 1)
+      this.contacts?.splice(contactIndex || 0 , 1 ) ;
+
+    }
+   
+
+
+  }
   
 
 }

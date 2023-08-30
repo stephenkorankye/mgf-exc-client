@@ -9,3 +9,11 @@ table {
     
 }
 
+.actionBtns div > button {
+    background-color: rgb(92, 92, 208) ;
+    color : white 
+}
+
+.actionBtns div:last-child > button {
+    background-color: rgb(195, 76, 76);
+}

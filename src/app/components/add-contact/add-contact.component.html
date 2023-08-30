@@ -56,7 +56,7 @@
             <label for="company">Company</label>
             <select class="form-select" name="company" [(ngModel)]="contact.company">
                 <option value="">Select Company</option>
-                <option value="'some company'">Some Company</option>
+                <option *ngFor="let company of companies" [value]="company.id">{{company.name}}</option>
             </select>
           </div>
 
@@ -71,7 +71,7 @@
   
       <div *ngIf="submitted">
         <h4>New Contact has been Added</h4>
-        <a routerLink="" class="btn btn-success mt-3" >Add Another Contact</a>
+        <a routerLink="/contacts" class="btn btn-success mt-3" >Go to Contacts</a>
       </div>
     </div>
   </div>
