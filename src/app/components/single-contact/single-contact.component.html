@@ -49,6 +49,7 @@
                 <select class="form-control" id="company" name="company" [(ngModel)]="contact.company.name" (change)="onCompanyChange($event)" >
                     <option [value]="contact.company.id" selected="">{{contact.company.name}}</option>
                     <option *ngFor="let company of companies" [value]="company.id" >{{company.name}}</option>
+                    <option *ngIf="loading">loading... </option>
                 </select>
               </div>
               

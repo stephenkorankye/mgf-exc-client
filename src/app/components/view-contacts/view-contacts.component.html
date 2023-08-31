@@ -42,7 +42,7 @@
 
       </tr>
     </thead>
-    <tbody>
+    <tbody *ngIf="!loading">
       <!-- column data  -->
       <tr *ngFor="let contact of contacts">
         <th>{{ contact.id }}</th>
@@ -58,6 +58,8 @@
       </tr>
     </tbody>
   </table>
+
+  <h4 *ngIf="loading" style="width: 100%" class="text-center mt-3"> Loading... </h4>
 
   <!-- pagination -->
   <div class="col-md-12 mt-4"> 

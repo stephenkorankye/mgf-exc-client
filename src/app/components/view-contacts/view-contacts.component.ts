@@ -20,10 +20,12 @@ export class ViewContactsComponent implements OnInit {
   sortDirection : "asc" | "desc" = "asc" ; 
   searchcolumn = ""
   searchQuery = "" 
+  loading = false ; 
 
   constructor(private contactsService : ContactsService , private router: Router  ) {} 
   
   ngOnInit(): void {
+    this.loading = true ; 
     this.getContacts() ; 
   }
 
@@ -35,6 +37,7 @@ export class ViewContactsComponent implements OnInit {
           this.allContacts = data.data ; 
           this.filteredContacts = data.data ; 
           console.log ( data.data )
+          this.loading = false ; 
 
           // initial data to display 
           this.contacts = data.data.slice(0 , this.perPage); 
@@ -42,8 +45,13 @@ export class ViewContactsComponent implements OnInit {
           // calculate total pages needed for pagination 
           this.totalPages = Math.ceil(data.data.length / this.perPage)
         }, 
-        error : (e) => console.error(e) 
+        error : (e) => {
+          console.error(e) ; 
+          this.loading = false ; 
+        }
       }); 
+
+     
   }
 
 

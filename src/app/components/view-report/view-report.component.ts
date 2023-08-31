@@ -19,10 +19,12 @@ export class ViewReportComponent implements OnInit {
   sortDirection : "asc" | "desc" = "asc" ; 
   searchcolumn = ""
   searchQuery = "" 
+  loading = false ; 
 
   constructor(private excelService: ExcelService, private companiesService: CompaniesService ) {} 
   
   ngOnInit(): void {
+    this.loading = true ; 
     this.getCompanies() ; 
   }
 
@@ -31,12 +33,16 @@ export class ViewReportComponent implements OnInit {
     this.companiesService.getAll()  
       .subscribe({
         next : (data) => {
+          this.loading = false ; 
           this.allCompanies = data.data ; 
           this.companies = data.data ; 
 
           
         }, 
-        error : (e) => console.error(e) 
+        error :(e) => {
+          console.error(e) ;
+          this.loading = false ;  
+        }
       }); 
   }
 

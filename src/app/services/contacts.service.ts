@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Contact, ContactForm } from '../models/contact.model';
-import { BASE_URL } from '../util/URL';
+import { BASE_URL } from '../../../URL';
 
 
 const ENDPOINT = BASE_URL + 'contacts';

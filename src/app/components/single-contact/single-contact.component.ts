@@ -17,9 +17,11 @@ export class SingleContactComponent implements OnInit {
   contactId = "" ; 
   submitted = false ; 
   errors : Array<string> = [] ; 
+  loading = false ; 
 
   constructor(private companiesService: CompaniesService , private contactsService : ContactsService , private route: ActivatedRoute , private router: Router ) {}
   ngOnInit(): void {
+    this.loading = true ;
     this.route.params.subscribe( params => {
       this.contactId = params['id'] ; 
       this.getContact(params['id']) ;
@@ -54,8 +56,12 @@ export class SingleContactComponent implements OnInit {
         next : (data) => {
           this.companies = data.data ;
           console.log ( data.data ) 
+          this.loading = false ; 
         } , 
-        error : (e) => console.error(e) 
+        error : (e) => {
+          console.error(e) ; 
+          this.loading = false ; 
+        }
       })
   }
 
