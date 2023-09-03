@@ -8,6 +8,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - View single Contact 
 - Adding a new Contact
 - Editing a Contact 
+- Soft Delete a Contact 
 - View companies and option to download as Excel
 
 ### Screenshots can be found in the ./screenshots folder
