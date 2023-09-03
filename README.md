@@ -17,7 +17,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - Clone this repository ```https://github.com/stephenkorankye/mgf-exc-client.git```
 - Change BASE_URL in URL.ts to the port on which the backend is being hosted on. Default is the hosted version (```https://mgf-server-at26x.ondigitalocean.app/```)
 - Open cmd and type ```npm install```
-- Type ```yarn start``` to start the application
+- Type ```ng serve``` to start the application
 
 ## Development server
 
